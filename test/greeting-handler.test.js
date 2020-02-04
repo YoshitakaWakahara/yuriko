@@ -2,29 +2,36 @@
 const greeting = require('../lib/greeting-handler');
 const assert = require('assert');
 
-//インスタンス生成
+//Create Instance for Test
 const res = new greeting();
 
-//時間判定のテスト
-assert.equal(res.judgeTime(0), 'midnight');
-assert.equal(res.judgeTime(4), 'midnight');
-assert.equal(res.judgeTime(5), 'morning');
-assert.equal(res.judgeTime(11), 'morning');
-assert.equal(res.judgeTime(12), 'noon');
-assert.equal(res.judgeTime(13), 'noon');
-assert.equal(res.judgeTime(14), 'afternoon');
-assert.equal(res.judgeTime(16), 'afternoon');
-assert.equal(res.judgeTime(17), 'evening');
-assert.equal(res.judgeTime(19), 'evening');
-assert.equal(res.judgeTime(20), 'night');
-assert.equal(res.judgeTime(24), 'night');
+//Test1: judgeWhatTime()
+//@Param: hours --> new Date().getHours()
+//@Return: String 
+assert.equal(res.judgeWhatTime(0), 'midnight');
+assert.equal(res.judgeWhatTime(4), 'midnight');
+assert.equal(res.judgeWhatTime(5), 'morning');
+assert.equal(res.judgeWhatTime(11), 'morning');
+assert.equal(res.judgeWhatTime(12), 'noon');
+assert.equal(res.judgeWhatTime(13), 'noon');
+assert.equal(res.judgeWhatTime(14), 'afternoon');
+assert.equal(res.judgeWhatTime(16), 'afternoon');
+assert.equal(res.judgeWhatTime(17), 'evening');
+assert.equal(res.judgeWhatTime(19), 'evening');
+assert.equal(res.judgeWhatTime(20), 'night');
+assert.equal(res.judgeWhatTime(24), 'night');
+assert.equal(res.judgeWhatTime(25), 'null');
+assert.equal(res.judgeWhatTime(-1), 'null');
 
-//レスポンスパターンのテスト
-assert.equal(res.getGreeting('midnight'), '夜更かしは厳禁ですよ、プロデューサーさん！')
-assert.equal(res.getGreeting('morning'), 'おはようございます、プロデューサーさん♪')
-assert.equal(res.getGreeting('noon'), 'お昼ですね、今日はどんなご飯を食べましょうか♪')
-assert.equal(res.getGreeting('afternoon'), '今日も後ちょっと、一緒に頑張りましょうね♪')
-assert.equal(res.getGreeting('evening'), 'お仕事お疲れ様でした、プロデューサーさん♪一緒に晩ごはんでもどうですか♪')
-assert.equal(res.getGreeting('night'), 'おやすみなさい、プロデューサーさん♪明日も一杯お話しましょうね♪')
+//Test2: readGreetingData() 
+//@Param: whatTime -> return value of judgeWhatTime() 
+//@Return: String 
+assert.equal(res.readGreetingData('midnight'), '夜更かしは厳禁ですよ、プロデューサーさん！')
+assert.equal(res.readGreetingData('morning'), 'おはようございます、プロデューサーさん♪')
+assert.equal(res.readGreetingData('noon'), 'お昼ですね、今日はどんなご飯を食べましょうか♪')
+assert.equal(res.readGreetingData('afternoon'), '今日も後ちょっと、一緒に頑張りましょうね♪')
+assert.equal(res.readGreetingData('evening'), 'お仕事お疲れ様でした、プロデューサーさん♪一緒に晩ごはんでもどうですか♪')
+assert.equal(res.readGreetingData('night'), 'おやすみなさい、プロデューサーさん♪明日も一杯お話しましょうね♪')
+assert.equal(res.readGreetingData('null'), 'null')
 
-console.log('テストが正常に完了しました');
+console.log('Complete all tests without error');

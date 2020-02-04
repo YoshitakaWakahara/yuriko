@@ -8,6 +8,7 @@ function getResponse(req) {
 }
 //ToDo Delete
 getResponse('hi');
+//getResponse('weather');
 
 module.exports = {
   getResponse
